@@ -151,7 +151,7 @@ class Paint extends JFrame {
 	public static void main(String argv[]) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				Paint paint = new Paint("paint");
+				Paint paint = new Paint("L'outil de peinture le plus perfectionné de 2018");
 			}
 		});
 	}
