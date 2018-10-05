@@ -35,6 +35,9 @@ import javax.swing.SwingUtilities;
 
 class Paint extends JFrame {
 	Vector<Shape> shapes = new Vector<Shape>();
+	Tool tool;
+	JPanel panel;
+	Color color = Color.BLACK;
 
 	class Tool extends AbstractAction implements MouseInputListener {
 		Point o;
@@ -110,10 +113,13 @@ class Paint extends JFrame {
 					abs(e.getY() - o.getY()));
 			panel.repaint();
 		}
+	}, new Tool("Red") {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Choosing color Red");
+			color = Color.RED;
+			panel.repaint();
+		}
 	} };
-	Tool tool;
-
-	JPanel panel;
 
 	public Paint(String title) {
 		super(title);
@@ -135,7 +141,7 @@ class Paint extends JFrame {
 				g2.setColor(Color.WHITE);
 				g2.fillRect(0, 0, getWidth(), getHeight());
 
-				g2.setColor(Color.BLACK);
+				g2.setColor(color);
 				for (Shape shape : shapes) {
 					g2.draw(shape);
 				}
