@@ -5,7 +5,7 @@
 
 
 /* imports *****************************************************************/
-
+package ui;
 import static java.lang.Math.*;
 
 import java.util.Vector;
