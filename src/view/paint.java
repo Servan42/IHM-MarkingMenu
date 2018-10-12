@@ -16,6 +16,7 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
@@ -27,6 +28,8 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputListener;
+
+import controler.MarkingMenu;
 
 /* paint *******************************************************************/
 
@@ -172,10 +175,11 @@ class Paint extends JFrame {
 				for (ColouredShape shape : shapes) {
 					g2.setColor(shape.color);
 					g2.draw(shape.shape);
+					
 				}
 			}
 		});
-
+		
 		pack();
 		setVisible(true);
 	}
