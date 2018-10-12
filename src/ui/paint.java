@@ -113,13 +113,31 @@ class Paint extends JFrame {
 					abs(e.getY() - o.getY()));
 			panel.repaint();
 		}
-	}, new Tool("Red") {
+	}, new Tool("Black") {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Choosing color Black");
+			color = Color.BLACK;
+			panel.repaint();
+		}
+	} , new Tool("Red") {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Choosing color Red");
 			color = Color.RED;
 			panel.repaint();
 		}
-	} };
+	}, new Tool("Orange") {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Choosing color Orange");
+			color = Color.ORANGE;
+			panel.repaint();
+		}
+	}, new Tool("Blue") {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Choosing color Blue");
+			color = Color.BLUE;
+			panel.repaint();
+		}
+	}};
 
 	public Paint(String title) {
 		super(title);
