@@ -20,7 +20,6 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Vector;
-import java.lang.Math.*;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -39,13 +38,13 @@ class Paint extends JFrame {
 	class ColouredShape {
 		Color color;
 		Shape shape;
-		
+
 		public ColouredShape(Color color, Shape shape) {
 			this.color = color;
 			this.shape = shape;
 		}
 	}
-	
+
 	class Tool extends AbstractAction implements MouseInputListener {
 		Point o;
 		Shape shape;
@@ -129,7 +128,7 @@ class Paint extends JFrame {
 			color = Color.BLACK;
 			panel.repaint();
 		}
-	} , new Tool("Red") {
+	}, new Tool("Red") {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Choosing color Red");
 			color = Color.RED;
@@ -147,7 +146,7 @@ class Paint extends JFrame {
 			color = Color.BLUE;
 			panel.repaint();
 		}
-	}};
+	} };
 
 	public Paint(String title) {
 		super(title);
