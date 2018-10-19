@@ -38,8 +38,7 @@ public class PaintData {
 		 * Creates a tool. If the name of the tool is not unique, it might create
 		 * problems.
 		 * 
-		 * @param name
-		 *            The tool's name
+		 * @param name The tool's name
 		 */
 		public Tool(String name) {
 			super(name);

@@ -17,10 +17,8 @@ public class Paint {
 	/**
 	 * Creates the controller with a link to the data and ui
 	 * 
-	 * @param donnees
-	 *            The data
-	 * @param ui
-	 *            The ui
+	 * @param donnees The data
+	 * @param ui      The ui
 	 */
 	public Paint(PaintData donnees, PaintUI ui) {
 		this.donnees = donnees;
@@ -36,10 +34,8 @@ public class Paint {
 	/**
 	 * Assigns a new tool to be used
 	 * 
-	 * @param oldTool
-	 *            The tool we're switching from
-	 * @param newTool
-	 *            The tool we're switching to
+	 * @param oldTool The tool we're switching from
+	 * @param newTool The tool we're switching to
 	 */
 	public void changeTool(Tool oldTool, Tool newTool) {
 		ui.changeTool(oldTool, newTool);
@@ -48,8 +44,7 @@ public class Paint {
 	/**
 	 * Assigns the eventually new list of shapes to be drawn by the ui, and redraws
 	 * 
-	 * @param shapes
-	 *            The list of shapes to be displayed
+	 * @param shapes The list of shapes to be displayed
 	 */
 	public void toolFinished(List shapes) {
 		ui.setShapes(shapes);
@@ -59,8 +54,7 @@ public class Paint {
 	/**
 	 * Sets the data to be used
 	 * 
-	 * @param donnees
-	 *            The data
+	 * @param donnees The data
 	 */
 	public void setData(PaintData donnees) {
 		this.donnees = donnees;
@@ -69,8 +63,7 @@ public class Paint {
 	/**
 	 * Sets the ui to be used
 	 * 
-	 * @param ui
-	 *            the ui
+	 * @param ui the ui
 	 */
 	public void setUI(PaintUI ui) {
 		this.ui = ui;

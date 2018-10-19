@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
+import controler.MarkingMenu;
 import model.ColouredShape;
 import model.PaintData.Tool;
 
@@ -35,6 +36,7 @@ public class PaintUI extends JFrame {
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(800, 600));
+
 		add(new JToolBar() {
 			{
 				for (AbstractAction tool : tools) {
@@ -65,10 +67,8 @@ public class PaintUI extends JFrame {
 	/**
 	 * Assigns the required listeners
 	 * 
-	 * @param oldTool
-	 *            The listeners to be removed
-	 * @param newTool
-	 *            The listeners to be added
+	 * @param oldTool The listeners to be removed
+	 * @param newTool The listeners to be added
 	 */
 	public void changeTool(Tool oldTool, Tool newTool) {
 		panel.removeMouseListener(oldTool);
@@ -81,8 +81,7 @@ public class PaintUI extends JFrame {
 	/**
 	 * Assigns the shapes to be displayed
 	 * 
-	 * @param shapes
-	 *            The list of shapes to be displayed
+	 * @param shapes The list of shapes to be displayed
 	 */
 	public void setShapes(List shapes) {
 		displayed = shapes;
