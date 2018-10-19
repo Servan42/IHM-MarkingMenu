@@ -14,7 +14,7 @@ import controler.Paint;
 
 public class MarkingMenuUI extends ComponentUI {
 
-	MarkingMenu menu;
+	private MarkingMenu menu;
 
 	public MarkingMenuUI(MarkingMenu menu) {
 		this.menu = menu;
@@ -28,7 +28,7 @@ public class MarkingMenuUI extends ComponentUI {
 		// TODO Auto-generated method stub
 		super.paint(g, c);
 		g.setColor(Color.BLUE);
-		g.fillOval(0, 0, 100, 100);
+		g.fillOval(menu.getPosX()-50, menu.getPosY()-50, 100, 100);
 		if (Paint.debug)
 			System.out.println("MarkingMenuUI.paint() called.");
 	}
