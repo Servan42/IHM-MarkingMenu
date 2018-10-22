@@ -25,7 +25,6 @@ public class MarkingMenuUI extends ComponentUI {
 
 	@Override
 	public void paint(Graphics g, JComponent c) {
-		// TODO Auto-generated method stub
 		super.paint(g, c);
 		g.setColor(Color.BLUE);
 		g.fillOval(menu.getPosX()-50, menu.getPosY()-50, 100, 100);
@@ -56,13 +55,12 @@ public class MarkingMenuUI extends ComponentUI {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-
+			menu.mouseReleased(e);
 		}
 
 		@Override
@@ -74,7 +72,6 @@ public class MarkingMenuUI extends ComponentUI {
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			// TODO Auto-generated method stub
-
 		}
 
 	}

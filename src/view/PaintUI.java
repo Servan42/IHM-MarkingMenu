@@ -14,6 +14,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,6 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import controler.MarkingMenu;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.BorderPane;
 import model.ColouredShape;
 import model.PaintData.Tool;
 
@@ -36,6 +35,8 @@ public class PaintUI extends JFrame {
 	JLayeredPane layeredPane;
 	MarkingMenu mm;
 	List<ColouredShape> displayed;
+	MouseListener[] storedListeners;
+	MouseMotionListener[] storedMotionListeners;
 
 	public PaintUI(String title, AbstractAction[] tools) {
 		super(title);
@@ -62,7 +63,7 @@ public class PaintUI extends JFrame {
 			}
 		}, new Integer(1));
 
-		layeredPane.add(mm = new MarkingMenu(), new Integer(1));
+		layeredPane.add(mm = new MarkingMenu(this), new Integer(1));
 
 		panel.setBounds(0, 0, this.getWidth(), this.getHeight());
 		mm.setBounds(0, 0, this.getWidth(), this.getHeight());
@@ -82,20 +83,19 @@ public class PaintUI extends JFrame {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (e.getButton() == MouseEvent.BUTTON3)
-					layeredPane.moveToFront(panel);
+				
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON3) {
-					layeredPane.moveToBack(panel);
-					mm.setPosX(e.getX());
-					mm.setPosY(e.getY());
+					// layeredPane.moveToBack(panel);
+					// mm.setPosX(e.getX());
+					// mm.setPosY(e.getY());
+					displayMenu(e.getX(), e.getY());
 				}
-					
-	
+
 			}
 
 			@Override
@@ -123,8 +123,10 @@ public class PaintUI extends JFrame {
 	/**
 	 * Assigns the required listeners
 	 * 
-	 * @param oldTool The listeners to be removed
-	 * @param newTool The listeners to be added
+	 * @param oldTool
+	 *            The listeners to be removed
+	 * @param newTool
+	 *            The listeners to be added
 	 */
 	public void changeTool(Tool oldTool, Tool newTool) {
 		panel.removeMouseListener(oldTool);
@@ -137,7 +139,8 @@ public class PaintUI extends JFrame {
 	/**
 	 * Assigns the shapes to be displayed
 	 * 
-	 * @param shapes The list of shapes to be displayed
+	 * @param shapes
+	 *            The list of shapes to be displayed
 	 */
 	public void setShapes(List shapes) {
 		displayed = shapes;
@@ -148,5 +151,52 @@ public class PaintUI extends JFrame {
 	 */
 	public void redraw() {
 		panel.repaint();
+	}
+
+	/**
+	 * Displays the MarkingMenu over the Pane and affects the right listeners
+	 * 
+	 * @param xPos
+	 *            the x position of the marking menu
+	 * @param yPos
+	 *            the y position of the marking menu
+	 */
+	public void displayMenu(int xPos, int yPos) {
+		storedListeners = panel.getListeners(MouseListener.class);
+		for (MouseListener ml : storedListeners)
+			panel.removeMouseListener(ml);
+		storedMotionListeners = panel.getListeners(MouseMotionListener.class);
+		for (MouseMotionListener ml : storedMotionListeners)
+			panel.removeMouseMotionListener(ml);
+
+		MouseListener[] mls = mm.getMouseListeners();
+		for (MouseListener ml : mls)
+			panel.addMouseListener(ml);
+		MouseMotionListener[] mmls = mm.getMouseMotionListeners();
+		for (MouseMotionListener ml : mmls)
+			panel.addMouseMotionListener(ml);
+
+		layeredPane.moveToBack(panel);
+		mm.setPosX(xPos);
+		mm.setPosY(yPos);
+	}
+
+	/**
+	 * Hides the MarkingMenu behind the panel and affects the right listeners
+	 */
+	public void hideMenu() {
+		MouseListener[] MMml = panel.getListeners(MouseListener.class);
+		for (MouseListener ml : MMml)
+			panel.removeMouseListener(ml);
+		MouseMotionListener[] MMmml = panel.getListeners(MouseMotionListener.class);
+		for (MouseMotionListener ml : MMmml)
+			panel.removeMouseMotionListener(ml);
+
+		for (MouseListener ml : storedListeners)
+			panel.addMouseListener(ml);
+		for (MouseMotionListener ml : storedMotionListeners)
+			panel.addMouseMotionListener(ml);
+
+		layeredPane.moveToFront(panel);
 	}
 }
