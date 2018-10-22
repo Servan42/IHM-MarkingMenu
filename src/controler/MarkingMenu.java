@@ -16,7 +16,7 @@ public class MarkingMenu extends JComponent {
 	private PaintUI globalUI;
 
 	public MarkingMenu(int posX, int posY, Object[] list, PaintUI globalUI) throws IllegalArgumentException {
-		if(list.length > 8)
+		if (list.length > 8)
 			throw new IllegalArgumentException();
 		this.setUI(ui = new MarkingMenuUI(this));
 		this.setBounds(0, 0, globalUI.getWidth(), globalUI.getHeight());
@@ -39,26 +39,30 @@ public class MarkingMenu extends JComponent {
 	public void setPosY(int y) {
 		data.setPosY(y);
 	}
-	
+
 	public int getDiameter() {
 		return data.getDiameter();
 	}
-	
+
 	public Object[] getList() {
 		return data.getList();
 	}
-	
+
 	public void mouseReleased(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON3)
 			globalUI.hideMenu();
 	}
-	
+
 	public void mouseMoved(MouseEvent e) {
-		if(e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter()/2)) {
-			double angle = -Math.toDegrees(Math.atan2((e.getY()-data.getPosY()), (e.getX()-data.getPosX())));
-			if(angle < 0)
-				angle += 360;
-			ui.indexFromAngle(angle);
+		if (e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter() / 2)) {
+			System.out.println(getIndexFromPoint(e.getPoint()));
 		}
+	}
+
+	private int getIndexFromPoint(Point2D e) {
+		double angle =-Math.toDegrees(Math.atan2((e.getY() - data.getPosY()), (e.getX() - data.getPosX()))); 
+		if (angle < 0)
+			angle += 360;
+		return ui.indexFromAngle(angle);
 	}
 }

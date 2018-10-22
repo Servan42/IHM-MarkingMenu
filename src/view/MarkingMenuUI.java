@@ -41,8 +41,10 @@ public class MarkingMenuUI extends ComponentUI {
 					menu.getPosY() + ((int) (diameter / 2 * Math.sin(Math.toRadians(i * 360 / numberOfItems)))));
 
 			g.drawString(items[i].toString(),
-					menu.getPosX() + ((int) (diameter / 3
-							* Math.cos(Math.toRadians((i * 360 / numberOfItems) + 360 / numberOfItems / 2)))) - items[i].toString().length()*2,
+					menu.getPosX()
+							+ ((int) (diameter / 3
+									* Math.cos(Math.toRadians((i * 360 / numberOfItems) + 360 / numberOfItems / 2))))
+							- items[i].toString().length() * 2,
 					menu.getPosY() + ((int) (diameter / 3
 							* Math.sin(Math.toRadians((i * 360 / numberOfItems) + 360 / numberOfItems / 2)))));
 		}
@@ -52,9 +54,16 @@ public class MarkingMenuUI extends ComponentUI {
 	}
 
 	public int indexFromAngle(double angle) {
-	
+		int nbItems = menu.getList().length;
+		int i = 0;
+		angle = 360-angle; // Making it clockwise
 		
-		return 0;
+		for (i = 0; i < nbItems; i++) {
+			if(angle >= i*360/nbItems && angle < (i+1)*360/nbItems)
+				break;
+		}
+
+		return i;
 	}
 
 	public class Handler implements MouseListener, MouseMotionListener {
