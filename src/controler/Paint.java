@@ -1,5 +1,6 @@
 package controler;
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
@@ -68,6 +69,12 @@ public class Paint {
 	public void setUI(PaintUI ui) {
 		this.ui = ui;
 	}
+	
+	public void mousePressed(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON3) {
+			ui.displayMenu(e.getX(), e.getY());
+		}
+	}
 
 	/* main *********************************************************************/
 
@@ -76,7 +83,7 @@ public class Paint {
 			public void run() {
 				Paint paint = new Paint();
 				PaintData data = new PaintData(paint);
-				PaintUI ui = new PaintUI("L'outil de peinture le plus perfectionné de 2018", data.getTools());
+				PaintUI ui = new PaintUI("L'outil de peinture le plus perfectionné de 2018", data.getTools(), paint);
 				paint.setUI(ui);
 				paint.setData(data);
 			}

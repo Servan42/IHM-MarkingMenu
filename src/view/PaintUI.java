@@ -25,12 +25,14 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import controler.MarkingMenu;
+import controler.Paint;
 import model.ColouredShape;
 import model.PaintData.Tool;
 
 /* paint *******************************************************************/
 
 public class PaintUI extends JFrame {
+	Paint controller;
 	JPanel panel;
 	JLayeredPane layeredPane;
 	MarkingMenu mm;
@@ -38,8 +40,10 @@ public class PaintUI extends JFrame {
 	MouseListener[] storedListeners;
 	MouseMotionListener[] storedMotionListeners;
 
-	public PaintUI(String title, AbstractAction[] tools) {
+	public PaintUI(String title, AbstractAction[] tools, Paint controller) {
 		super(title);
+		this.controller = controller;
+		
 		displayed = new ArrayList();
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -88,14 +92,7 @@ public class PaintUI extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getButton() == MouseEvent.BUTTON3) {
-					// layeredPane.moveToBack(panel);
-					// mm.setPosX(e.getX());
-					// mm.setPosY(e.getY());
-					displayMenu(e.getX(), e.getY());
-				}
-
+				controller.mousePressed(e);
 			}
 
 			@Override
