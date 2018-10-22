@@ -26,17 +26,24 @@ public class MarkingMenuUI extends ComponentUI {
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		int diameter = menu.getDiameter();
+		Object[] items = menu.getList();
+		int numberOfItems = items.length;
 		super.paint(g, c);
 		g.setColor(Color.RED);
 		g.fillOval(menu.getPosX() - diameter / 2, menu.getPosY() - diameter / 2, diameter, diameter);
 		g.setColor(Color.BLACK);
 		g.fillOval(menu.getPosX() - diameter / 8, menu.getPosY() - diameter / 8, diameter / 4, diameter / 4);
 
-		int numberOfItems = 8;
-		for (int i = 0; i < numberOfItems; i++) {
-			g.drawLine(menu.getPosX(), menu.getPosY(),
-					menu.getPosX() + ((int) (diameter / 2 * Math.cos(Math.toRadians(i * 360 / numberOfItems)))),
-					menu.getPosY() + ((int) (diameter / 2 * Math.sin(Math.toRadians(i * 360 / numberOfItems)))));
+		for (int i = 0; i < numberOfItems * 2; i++) {
+			if (i % 2 == 0) {
+				g.drawString(items[i / 2].toString(),
+						menu.getPosX() + ((int) (diameter / 3 * Math.cos(Math.toRadians(i/2 * 360 / numberOfItems)))),
+						menu.getPosY() + ((int) (diameter / 3 * Math.sin(Math.toRadians(i/2 * 360 / numberOfItems)))));
+			} else {
+				g.drawLine(menu.getPosX(), menu.getPosY(),
+						menu.getPosX() + ((int) (diameter / 2 * Math.cos(Math.toRadians(i * 360 / (numberOfItems*2))))),
+						menu.getPosY() + ((int) (diameter / 2 * Math.sin(Math.toRadians(i * 360 / (numberOfItems*2))))));
+			}
 		}
 
 		if (Paint.debug)

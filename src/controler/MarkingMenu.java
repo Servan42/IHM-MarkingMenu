@@ -43,6 +43,10 @@ public class MarkingMenu extends JComponent {
 		return data.getDiameter();
 	}
 	
+	public Object[] getList() {
+		return data.getList();
+	}
+	
 	public void mouseReleased(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON3)
 			globalUI.hideMenu();
