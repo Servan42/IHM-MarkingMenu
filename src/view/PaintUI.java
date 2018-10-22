@@ -68,10 +68,7 @@ public class PaintUI extends JFrame {
 			}
 		}, new Integer(1));
 
-		//layeredPane.add(mm = new MarkingMenu(this), new Integer(1));
-		
 		panel.setBounds(0, 0, this.getWidth(), this.getHeight());
-		//mm.setBounds(0, 0, this.getWidth(), this.getHeight());
 
 		add(new JToolBar() {
 			{

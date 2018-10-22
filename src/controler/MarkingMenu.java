@@ -1,6 +1,7 @@
 package controler;
 
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 
 import javax.swing.JComponent;
 
@@ -46,5 +47,14 @@ public class MarkingMenu extends JComponent {
 	public void mouseReleased(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON3)
 			globalUI.hideMenu();
+	}
+	
+	public void mouseMoved(MouseEvent e) {
+		if(e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter()/2)) {
+			double angle = -Math.toDegrees(Math.atan2((e.getY()-data.getPosY()), (e.getX()-data.getPosX())));
+			if(angle < 0)
+				angle += 360;
+			ui.indexFromAngle(angle);
+		}
 	}
 }

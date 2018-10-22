@@ -43,6 +43,12 @@ public class MarkingMenuUI extends ComponentUI {
 			System.out.println("MarkingMenuUI.paint() called.");
 	}
 
+	public int indexFromAngle(double angle) {
+	
+		
+		return 0;
+	}
+
 	public class Handler implements MouseListener, MouseMotionListener {
 
 		@Override
@@ -70,19 +76,18 @@ public class MarkingMenuUI extends ComponentUI {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 			menu.mouseReleased(e);
 		}
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			// TODO Auto-generated method stub
-
+			menu.mouseMoved(e);
 		}
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			// TODO Auto-generated method stub
+
 		}
 
 	}
