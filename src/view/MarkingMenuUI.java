@@ -34,16 +34,17 @@ public class MarkingMenuUI extends ComponentUI {
 		g.setColor(Color.BLACK);
 		g.fillOval(menu.getPosX() - diameter / 8, menu.getPosY() - diameter / 8, diameter / 4, diameter / 4);
 
-		for (int i = 0; i < numberOfItems * 2; i++) {
-			if (i % 2 == 0) {
-				g.drawString(items[i / 2].toString(),
-						menu.getPosX() + ((int) (diameter / 3 * Math.cos(Math.toRadians(i/2 * 360 / numberOfItems)))),
-						menu.getPosY() + ((int) (diameter / 3 * Math.sin(Math.toRadians(i/2 * 360 / numberOfItems)))));
-			} else {
-				g.drawLine(menu.getPosX(), menu.getPosY(),
-						menu.getPosX() + ((int) (diameter / 2 * Math.cos(Math.toRadians(i * 360 / (numberOfItems*2))))),
-						menu.getPosY() + ((int) (diameter / 2 * Math.sin(Math.toRadians(i * 360 / (numberOfItems*2))))));
-			}
+		for (int i = 0; i < numberOfItems; i++) {
+
+			g.drawLine(menu.getPosX(), menu.getPosY(),
+					menu.getPosX() + ((int) (diameter / 2 * Math.cos(Math.toRadians(i * 360 / numberOfItems)))),
+					menu.getPosY() + ((int) (diameter / 2 * Math.sin(Math.toRadians(i * 360 / numberOfItems)))));
+
+			g.drawString(items[i].toString(),
+					menu.getPosX() + ((int) (diameter / 3
+							* Math.cos(Math.toRadians((i * 360 / numberOfItems) + 360 / numberOfItems / 2)))) - items[i].toString().length()*2,
+					menu.getPosY() + ((int) (diameter / 3
+							* Math.sin(Math.toRadians((i * 360 / numberOfItems) + 360 / numberOfItems / 2)))));
 		}
 
 		if (Paint.debug)
