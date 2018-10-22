@@ -75,6 +75,10 @@ public class PaintData {
 
 		public void mouseMoved(MouseEvent e) {
 		}
+		
+		public String toString() {
+			return name;
+		}
 	}
 
 	/**
