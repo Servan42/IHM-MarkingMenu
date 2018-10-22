@@ -35,7 +35,7 @@ public class PaintUI extends JFrame {
 	Paint controller;
 	JPanel panel;
 	JLayeredPane layeredPane;
-	MarkingMenu mm;
+	List<MarkingMenu> markingMenus;
 	List<ColouredShape> displayed;
 	MouseListener[] storedListeners;
 	MouseMotionListener[] storedMotionListeners;
@@ -43,9 +43,10 @@ public class PaintUI extends JFrame {
 	public PaintUI(String title, AbstractAction[] tools, Paint controller) {
 		super(title);
 		this.controller = controller;
-		
-		displayed = new ArrayList();
 
+		displayed = new ArrayList();
+		markingMenus = new ArrayList();
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(800, 600));
 
@@ -67,10 +68,10 @@ public class PaintUI extends JFrame {
 			}
 		}, new Integer(1));
 
-		layeredPane.add(mm = new MarkingMenu(this), new Integer(1));
-
+		//layeredPane.add(mm = new MarkingMenu(this), new Integer(1));
+		
 		panel.setBounds(0, 0, this.getWidth(), this.getHeight());
-		mm.setBounds(0, 0, this.getWidth(), this.getHeight());
+		//mm.setBounds(0, 0, this.getWidth(), this.getHeight());
 
 		add(new JToolBar() {
 			{
@@ -81,13 +82,11 @@ public class PaintUI extends JFrame {
 		}, BorderLayout.NORTH);
 		add(layeredPane, BorderLayout.CENTER);
 
-		layeredPane.moveToBack(mm);
-
 		panel.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				
+
 			}
 
 			@Override
@@ -158,7 +157,10 @@ public class PaintUI extends JFrame {
 	 * @param yPos
 	 *            the y position of the marking menu
 	 */
-	public void displayMenu(int xPos, int yPos) {
+	public void displayMenu(MarkingMenu mm) {
+		layeredPane.add(mm, new Integer(1));
+		markingMenus.add(mm);
+		
 		storedListeners = panel.getListeners(MouseListener.class);
 		for (MouseListener ml : storedListeners)
 			panel.removeMouseListener(ml);
@@ -173,9 +175,7 @@ public class PaintUI extends JFrame {
 		for (MouseMotionListener ml : mmls)
 			panel.addMouseMotionListener(ml);
 
-		layeredPane.moveToBack(panel);
-		mm.setPosX(xPos);
-		mm.setPosY(yPos);
+		layeredPane.moveToFront(mm);
 	}
 
 	/**
@@ -194,6 +194,10 @@ public class PaintUI extends JFrame {
 		for (MouseMotionListener ml : storedMotionListeners)
 			panel.addMouseMotionListener(ml);
 
+		for(MarkingMenu mm : markingMenus)
+			layeredPane.remove(mm);
+		markingMenus.clear();
+		
 		layeredPane.moveToFront(panel);
 	}
 }

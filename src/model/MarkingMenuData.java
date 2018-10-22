@@ -3,10 +3,12 @@ package model;
 public class MarkingMenuData {
 	private int posX;
 	private int posY;
+	private Object[] list;
 	
-	public MarkingMenuData(int x, int y) {
+	public MarkingMenuData(int x, int y, Object[] list) {
 		posX = x;
 		posY = y;
+		this.list = list;
 	}
 	
 	public void setPosX(int x){
@@ -23,5 +25,9 @@ public class MarkingMenuData {
 	
 	public int getPosY() {
 		return posY;
+	}
+	
+	public Object[] getList() {
+		return list.clone();
 	}
 }

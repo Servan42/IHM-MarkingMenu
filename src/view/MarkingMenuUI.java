@@ -27,7 +27,7 @@ public class MarkingMenuUI extends ComponentUI {
 	public void paint(Graphics g, JComponent c) {
 		super.paint(g, c);
 		g.setColor(Color.BLUE);
-		g.fillOval(menu.getPosX()-50, menu.getPosY()-50, 100, 100);
+		g.fillOval(menu.getPosX() - 50, menu.getPosY() - 50, 100, 100);
 		if (Paint.debug)
 			System.out.println("MarkingMenuUI.paint() called.");
 	}
