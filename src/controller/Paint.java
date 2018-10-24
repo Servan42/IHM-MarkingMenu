@@ -16,7 +16,7 @@ import view.PaintUI;
  * Controller of Paint
  */
 public class Paint {
-	public static final boolean debug = true;
+	public static final boolean debug = false;
 
 	private PaintData donnees;
 	private PaintUI ui;
