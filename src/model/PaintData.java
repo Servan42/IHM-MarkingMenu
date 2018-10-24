@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
@@ -67,11 +66,13 @@ public class PaintData {
 		}
 
 		public void mousePressed(MouseEvent e) {
-			o = e.getPoint();
+			if (e.getButton() == MouseEvent.BUTTON1 && !rightButtonDown())
+				o = e.getPoint();
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			shape = null;
+			if (e.getButton() == MouseEvent.BUTTON1 && !rightButtonDown())
+				shape = null;
 		}
 
 		public void mouseDragged(MouseEvent e) {
@@ -172,7 +173,7 @@ public class PaintData {
 		}, new Tool("Orange") {
 			public void actionPerformed(ActionEvent e) {
 				if (Paint.debug)
-					System.out.println("Choosing color Orange" + this.name);
+					System.out.println("Choosing color Orange");
 				color = Color.ORANGE;
 				controller.toolFinished(new ArrayList(shapes));
 			}
@@ -213,6 +214,15 @@ public class PaintData {
 	 */
 	public boolean leftButtonDown() {
 		return buttons[0];
+	}
+
+	/**
+	 * Indicates if the left button is held down
+	 * 
+	 * @return
+	 */
+	public boolean rightButtonDown() {
+		return buttons[2];
 	}
 
 	/**
