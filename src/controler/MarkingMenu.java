@@ -8,7 +8,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 
 import model.MarkingMenuData;
-import model.PaintData;
+import model.PaintData.Tool;
 import view.MarkingMenuUI;
 import view.PaintUI;
 
@@ -17,6 +17,7 @@ public class MarkingMenu extends JComponent {
 	private MarkingMenuUI ui;
 	private MarkingMenuData data;
 	private PaintUI globalUI;
+	private static int mmCount = 0;
 
 	public MarkingMenu(int posX, int posY, AbstractAction[] list, PaintUI globalUI) throws IllegalArgumentException {
 		if (list.length > 8)
@@ -25,6 +26,7 @@ public class MarkingMenu extends JComponent {
 		this.setBounds(0, 0, globalUI.getWidth(), globalUI.getHeight());
 		data = new MarkingMenuData(posX, posY, list);
 		this.globalUI = globalUI;
+		mmCount++;
 	}
 
 	public int getPosX() {
@@ -64,14 +66,15 @@ public class MarkingMenu extends JComponent {
 	public void handleMoved(MouseEvent e) {
 		if (e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter() / 2)) {
 			globalUI.hideMenu();
-			
 			AbstractAction item = data.getList()[getIndexFromPoint(e.getPoint())];
+			if(((Tool)item).getOptions() != null)
+			globalUI.displayMenu(new MarkingMenu(e.getX(), e.getY(), ((Tool)item).getOptions(), globalUI));
 			item.actionPerformed(new ActionEvent(item, ActionEvent.ACTION_PERFORMED, "MarkingMenuSelect"));
 		}
 	}
 
 	private int getIndexFromPoint(Point2D e) {
-		double angle =-Math.toDegrees(Math.atan2((e.getY() - data.getPosY()), (e.getX() - data.getPosX()))); 
+		double angle = -Math.toDegrees(Math.atan2((e.getY() - data.getPosY()), (e.getX() - data.getPosX())));
 		if (angle < 0)
 			angle += 360;
 		return ui.indexFromAngle(angle);

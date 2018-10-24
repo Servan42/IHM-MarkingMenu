@@ -82,6 +82,10 @@ public class PaintData {
 		public String toString() {
 			return name;
 		}
+
+		public AbstractAction[] getOptions() {
+			return null;
+		}
 	}
 
 	/**
@@ -103,6 +107,9 @@ public class PaintData {
 				path.lineTo(e.getX(), e.getY());
 				controller.toolFinished(new ArrayList(shapes));
 			}
+			public AbstractAction[] getOptions() {
+				return colors.clone();
+			}
 		}, new Tool("rect") {
 			public void mouseDragged(MouseEvent e) {
 				if (!SwingUtilities.isLeftMouseButton(e))
@@ -118,6 +125,9 @@ public class PaintData {
 						Math.abs(e.getY() - o.getY()));
 				controller.toolFinished(new ArrayList(shapes));
 			}
+			public AbstractAction[] getOptions() {
+				return colors.clone();
+			}
 		}, new Tool("elli") {
 			public void mouseDragged(MouseEvent e) {
 				if (!SwingUtilities.isLeftMouseButton(e))
@@ -132,6 +142,9 @@ public class PaintData {
 				elli.setFrame(Math.min(e.getX(), o.getX()), Math.min(e.getY(), o.getY()), Math.abs(e.getX() - o.getX()),
 						Math.abs(e.getY() - o.getY()));
 				controller.toolFinished(new ArrayList(shapes));
+			}
+			public AbstractAction[] getOptions() {
+				return colors.clone();
 			}
 		}, new Tool("Black") {
 			public void actionPerformed(ActionEvent e) {
