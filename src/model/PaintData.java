@@ -66,7 +66,6 @@ public class PaintData {
 		}
 
 		public void mousePressed(MouseEvent e) {
-			if (e.getButton() == MouseEvent.BUTTON1 && !rightButtonDown())
 				o = e.getPoint();
 		}
 
