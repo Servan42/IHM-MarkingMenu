@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
+import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputListener;
 
 import controler.Paint;
@@ -87,6 +88,9 @@ public class PaintData {
 	public void initTools() {
 		Tool[] tools = { new Tool("pen") {
 			public void mouseDragged(MouseEvent e) {
+				if(!SwingUtilities.isLeftMouseButton(e))
+					return;
+				
 				Path2D.Double path = (Path2D.Double) shape;
 				if (path == null) {
 					path = new Path2D.Double();
@@ -99,6 +103,9 @@ public class PaintData {
 			}
 		}, new Tool("rect") {
 			public void mouseDragged(MouseEvent e) {
+				if(!SwingUtilities.isLeftMouseButton(e))
+					return;
+				
 				Rectangle2D.Double rect = (Rectangle2D.Double) shape;
 				if (rect == null) {
 					rect = new Rectangle2D.Double(o.getX(), o.getY(), 0, 0);
@@ -111,6 +118,9 @@ public class PaintData {
 			}
 		}, new Tool("elli") {
 			public void mouseDragged(MouseEvent e) {
+				if(!SwingUtilities.isLeftMouseButton(e))
+					return;
+				
 				Ellipse2D.Double elli = (Ellipse2D.Double) shape;
 				if (elli == null) {
 					elli = new Ellipse2D.Double(o.getX(), o.getY(), 0, 0);
