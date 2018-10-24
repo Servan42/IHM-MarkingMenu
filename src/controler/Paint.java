@@ -1,8 +1,9 @@
 package controler;
 
-import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.swing.SwingUtilities;
 
@@ -19,10 +20,8 @@ public class Paint {
 	/**
 	 * Creates the controller with a link to the data and ui
 	 * 
-	 * @param donnees
-	 *            The data
-	 * @param ui
-	 *            The ui
+	 * @param donnees The data
+	 * @param ui      The ui
 	 */
 	public Paint(PaintData donnees, PaintUI ui) {
 		this.donnees = donnees;
@@ -38,10 +37,8 @@ public class Paint {
 	/**
 	 * Assigns a new tool to be used
 	 * 
-	 * @param oldTool
-	 *            The tool we're switching from
-	 * @param newTool
-	 *            The tool we're switching to
+	 * @param oldTool The tool we're switching from
+	 * @param newTool The tool we're switching to
 	 */
 	public void changeTool(Tool oldTool, Tool newTool) {
 		ui.changeTool(oldTool, newTool);
@@ -50,8 +47,7 @@ public class Paint {
 	/**
 	 * Assigns the eventually new list of shapes to be drawn by the ui, and redraws
 	 * 
-	 * @param shapes
-	 *            The list of shapes to be displayed
+	 * @param shapes The list of shapes to be displayed
 	 */
 	public void toolFinished(List shapes) {
 		ui.setShapes(shapes);
@@ -61,8 +57,7 @@ public class Paint {
 	/**
 	 * Sets the data to be used
 	 * 
-	 * @param donnees
-	 *            The data
+	 * @param donnees The data
 	 */
 	public void setData(PaintData donnees) {
 		this.donnees = donnees;
@@ -71,8 +66,7 @@ public class Paint {
 	/**
 	 * Sets the ui to be used
 	 * 
-	 * @param ui
-	 *            the ui
+	 * @param ui the ui
 	 */
 	public void setUI(PaintUI ui) {
 		this.ui = ui;
@@ -80,6 +74,7 @@ public class Paint {
 
 	/**
 	 * Handles the mousePressed event over the window
+	 * 
 	 * @param e the event data
 	 */
 	public void mousePressed(MouseEvent e) {
@@ -88,16 +83,16 @@ public class Paint {
 			try {
 				MarkingMenu mm = new MarkingMenu(e.getX(), e.getY(), donnees.getTools(), ui);
 				ui.displayMenu(mm);
-			} catch(IllegalArgumentException iae) {
+			} catch (IllegalArgumentException iae) {
 				// La liste donnée est trop longue, on n'affiche pas le menu
-				if(debug)
+				if (debug)
 					System.out.println("Paint.mousePressed IllegalArgumentException");
 			}
 		}
-		
+
 		donnees.buttonDown(e.getButton());
 	}
-	
+
 	public void mouseReleased(MouseEvent e) {
 		donnees.buttonUp(e.getButton());
 	}
@@ -109,7 +104,10 @@ public class Paint {
 			public void run() {
 				Paint paint = new Paint();
 				PaintData data = new PaintData(paint);
-				PaintUI ui = new PaintUI("L'outil de peinture le plus perfectionné de 2018", data.getTools(), paint);
+				PaintUI ui = new PaintUI("L'outil de peinture le plus perfectionné de 2018", Stream
+						.concat(Arrays.stream(data.getTools()), Arrays.stream(data.getColors())).toArray(Tool[]::new),
+						paint);
+
 				paint.setUI(ui);
 				paint.setData(data);
 			}
