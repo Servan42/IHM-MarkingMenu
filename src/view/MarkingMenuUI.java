@@ -9,13 +9,21 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
-import controler.MarkingMenu;
-import controler.Paint;
+import controller.MarkingMenu;
+import controller.Paint;
 
+/**
+ * View of the Marking Menu.
+ */
 public class MarkingMenuUI extends ComponentUI {
 
 	private MarkingMenu menu;
 
+	/**
+	 * Constructor of the view.
+	 * 
+	 * @param menu Controller of the Marking Menu.
+	 */
 	public MarkingMenuUI(MarkingMenu menu) {
 		this.menu = menu;
 		Handler handler = new Handler();
@@ -53,6 +61,12 @@ public class MarkingMenuUI extends ComponentUI {
 			System.out.println("MarkingMenuUI.paint() called.");
 	}
 
+	/**
+	 * Resolve which item is at which angle.
+	 * 
+	 * @param angle The angle of the item to identify.
+	 * @return The item that is at this angle.
+	 */
 	public int indexFromAngle(double angle) {
 		int nbItems = menu.getList().length;
 		int i = 0;
@@ -66,6 +80,9 @@ public class MarkingMenuUI extends ComponentUI {
 		return i;
 	}
 
+	/**
+	 * Class that catch the events on the MarkingMenu.
+	 */
 	public class Handler implements MouseListener, MouseMotionListener {
 
 		@Override

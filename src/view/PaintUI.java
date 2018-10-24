@@ -24,13 +24,14 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
-import controler.MarkingMenu;
-import controler.Paint;
+import controller.MarkingMenu;
+import controller.Paint;
 import model.ColouredShape;
 import model.PaintData.Tool;
 
 /* paint *******************************************************************/
 
+@SuppressWarnings("serial")
 public class PaintUI extends JFrame {
 	Paint controller;
 	JPanel panel;
@@ -44,11 +45,12 @@ public class PaintUI extends JFrame {
 		super(title);
 		this.controller = controller;
 
-		displayed = new ArrayList();
-		markingMenus = new ArrayList();
+		displayed = new ArrayList<>();
+		markingMenus = new ArrayList<>();
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(1920, 1080));
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setMinimumSize(new Dimension(800, 600));
@@ -68,7 +70,7 @@ public class PaintUI extends JFrame {
 			}
 		}, new Integer(1));
 
-		panel.setBounds(0, 0, this.getWidth(), this.getHeight());
+		panel.setBounds(0, 0, 1920, 1080);
 
 		add(new JToolBar() {
 			{
@@ -93,18 +95,15 @@ public class PaintUI extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -144,6 +143,7 @@ public class PaintUI extends JFrame {
 	 * 
 	 * @param shapes The list of shapes to be displayed
 	 */
+	@SuppressWarnings("rawtypes")
 	public void setShapes(List shapes) {
 		displayed = shapes;
 	}

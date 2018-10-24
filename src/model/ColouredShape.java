@@ -3,6 +3,9 @@ package model;
 import java.awt.Color;
 import java.awt.Shape;
 
+/**
+ * Representation of a shape and its color.
+ */
 public class ColouredShape {
 	Color color;
 	Shape shape;

@@ -1,4 +1,4 @@
-package controler;
+package controller;
 
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
@@ -11,8 +11,11 @@ import model.PaintData;
 import model.PaintData.Tool;
 import view.PaintUI;
 
+/**
+ * Controller of Paint
+ */
 public class Paint {
-	public static final boolean debug = true;
+	public static final boolean debug = false;
 
 	private PaintData donnees;
 	private PaintUI ui;
@@ -49,6 +52,7 @@ public class Paint {
 	 * 
 	 * @param shapes The list of shapes to be displayed
 	 */
+	@SuppressWarnings("rawtypes")
 	public void toolFinished(List shapes) {
 		ui.setShapes(shapes);
 		ui.redraw();
@@ -93,6 +97,11 @@ public class Paint {
 		donnees.buttonDown(e.getButton());
 	}
 
+	/**
+	 * Notify Paint data that the mouse button is no longer pressed.
+	 * 
+	 * @param e The mouse event.
+	 */
 	public void mouseReleased(MouseEvent e) {
 		donnees.buttonUp(e.getButton());
 	}

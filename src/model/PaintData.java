@@ -15,8 +15,12 @@ import javax.swing.AbstractAction;
 import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputListener;
 
-import controler.Paint;
+import controller.Paint;
 
+/**
+ * Data of Paint
+ */
+@SuppressWarnings("serial")
 public class PaintData {
 	Paint controller;
 
@@ -27,6 +31,11 @@ public class PaintData {
 	Tool[] colors;
 	boolean[] buttons = new boolean[3];
 
+	/**
+	 * Constructor of PaintData.
+	 * 
+	 * @param controller The controller of Paint.
+	 */
 	public PaintData(Paint controller) {
 		this.controller = controller;
 		initTools();
@@ -66,7 +75,7 @@ public class PaintData {
 		}
 
 		public void mousePressed(MouseEvent e) {
-				o = e.getPoint();
+			o = e.getPoint();
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -93,7 +102,7 @@ public class PaintData {
 	 * Initializes the tools list
 	 */
 	public void initTools() {
-		Tool[] tools = { new Tool("pen") {
+		Tool[] tools = { new Tool("Pen") {
 			public void mouseDragged(MouseEvent e) {
 				if (!SwingUtilities.isLeftMouseButton(e))
 					return;
@@ -112,7 +121,7 @@ public class PaintData {
 			public AbstractAction[] getOptions() {
 				return colors.clone();
 			}
-		}, new Tool("rect") {
+		}, new Tool("Rect") {
 			public void mouseDragged(MouseEvent e) {
 				if (!SwingUtilities.isLeftMouseButton(e))
 					return;
@@ -131,7 +140,7 @@ public class PaintData {
 			public AbstractAction[] getOptions() {
 				return colors.clone();
 			}
-		}, new Tool("elli") {
+		}, new Tool("Elli") {
 			public void mouseDragged(MouseEvent e) {
 				if (!SwingUtilities.isLeftMouseButton(e))
 					return;
