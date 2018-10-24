@@ -48,12 +48,16 @@ public class MarkingMenu extends JComponent {
 		return data.getList();
 	}
 
-	public void mouseReleased(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON3)
+	public void handleReleased(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON3) {
 			globalUI.hideMenu();
+			if (e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter() / 8)) {
+				System.out.println(getIndexFromPoint(e.getPoint()));
+			}
+		}
 	}
 
-	public void mouseMoved(MouseEvent e) {
+	public void handleMoved(MouseEvent e) {
 		if (e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter() / 2)) {
 			System.out.println(getIndexFromPoint(e.getPoint()));
 		}
