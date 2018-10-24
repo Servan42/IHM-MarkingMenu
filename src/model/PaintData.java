@@ -24,12 +24,14 @@ import controller.Paint;
 public class PaintData {
 	Paint controller;
 
-	List<ColouredShape> shapes = new ArrayList<ColouredShape>();
-	Tool selectedTool;
-	Color color = Color.BLACK;
-	Tool[] tools;
-	Tool[] colors;
-	boolean[] buttons = new boolean[3];
+	private List<ColouredShape> shapes = new ArrayList<ColouredShape>();
+	private Tool selectedTool;
+	private Color color = Color.BLACK;
+	private boolean filled;
+	private Tool[] tools;
+	private Tool[] colors;
+	private Tool[] fill;
+	private boolean[] buttons = new boolean[3];
 
 	/**
 	 * Constructor of PaintData.
@@ -79,7 +81,7 @@ public class PaintData {
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			if (e.getButton() == MouseEvent.BUTTON1 && !rightButtonDown())
+			if (e.getButton() == MouseEvent.BUTTON1)
 				shape = null;
 		}
 
@@ -112,7 +114,7 @@ public class PaintData {
 					path = new Path2D.Double();
 					path.moveTo(o.getX(), o.getY());
 					shape = path;
-					shapes.add(new ColouredShape(color, path));
+					shapes.add(new ColouredShape(color, path, false));
 				}
 				path.lineTo(e.getX(), e.getY());
 				controller.toolFinished(new ArrayList(shapes));
@@ -130,7 +132,7 @@ public class PaintData {
 				if (rect == null) {
 					rect = new Rectangle2D.Double(o.getX(), o.getY(), 0, 0);
 					shape = rect;
-					shapes.add(new ColouredShape(color, rect));
+					shapes.add(new ColouredShape(color, rect, filled));
 				}
 				rect.setRect(Math.min(e.getX(), o.getX()), Math.min(e.getY(), o.getY()), Math.abs(e.getX() - o.getX()),
 						Math.abs(e.getY() - o.getY()));
@@ -138,7 +140,7 @@ public class PaintData {
 			}
 
 			public AbstractAction[] getOptions() {
-				return colors.clone();
+				return fill.clone();
 			}
 		}, new Tool("Elli") {
 			public void mouseDragged(MouseEvent e) {
@@ -149,7 +151,7 @@ public class PaintData {
 				if (elli == null) {
 					elli = new Ellipse2D.Double(o.getX(), o.getY(), 0, 0);
 					shape = elli;
-					shapes.add(new ColouredShape(color, elli));
+					shapes.add(new ColouredShape(color, elli, filled));
 				}
 				elli.setFrame(Math.min(e.getX(), o.getX()), Math.min(e.getY(), o.getY()), Math.abs(e.getX() - o.getX()),
 						Math.abs(e.getY() - o.getY()));
@@ -157,7 +159,7 @@ public class PaintData {
 			}
 
 			public AbstractAction[] getOptions() {
-				return colors.clone();
+				return fill.clone();
 			}
 		} };
 
@@ -195,6 +197,34 @@ public class PaintData {
 		} };
 
 		this.colors = colors;
+
+		Tool[] fill = { new Tool("Filled") {
+
+			public void actionPerformed(ActionEvent e) {
+				if (Paint.debug)
+					System.out.println("Choosing filling mode");
+				filled = true;
+				controller.toolFinished(new ArrayList(shapes));
+			}
+
+			public AbstractAction[] getOptions() {
+				return colors.clone();
+			}
+		}, new Tool("Empty") {
+			public void actionPerformed(ActionEvent e) {
+				if (Paint.debug)
+					System.out.println("Choosing empty mode");
+				filled = false;
+				controller.toolFinished(new ArrayList(shapes));
+			}
+
+			public AbstractAction[] getOptions() {
+				return colors.clone();
+			}
+		} };
+
+		this.fill = fill;
+
 	}
 
 	/**
@@ -248,6 +278,15 @@ public class PaintData {
 	 * @return A copy of the colors list
 	 */
 	public Tool[] getColors() {
-		return tools.clone();
+		return colors.clone();
+	}
+	
+	/**
+	 * Returns a copy of the filling information
+	 * 
+	 * @return A copy of the filling information
+	 */
+	public Tool[] getFill() {
+		return fill.clone();
 	}
 }

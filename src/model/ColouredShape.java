@@ -7,12 +7,14 @@ import java.awt.Shape;
  * Representation of a shape and its color.
  */
 public class ColouredShape {
-	Color color;
-	Shape shape;
+	private Color color;
+	private Shape shape;
+	private boolean filled;
 
-	public ColouredShape(Color color, Shape shape) {
+	public ColouredShape(Color color, Shape shape, boolean fill) {
 		this.color = color;
 		this.shape = shape;
+		filled = fill;
 	}
 
 	public Color getColor() {
@@ -21,5 +23,9 @@ public class ColouredShape {
 
 	public Shape getShape() {
 		return shape;
+	}
+
+	public boolean isFilled() {
+		return filled;
 	}
 }

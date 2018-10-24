@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.swing.AbstractAction;
 import javax.swing.SwingUtilities;
 
 import model.PaintData;
@@ -15,7 +16,7 @@ import view.PaintUI;
  * Controller of Paint
  */
 public class Paint {
-	public static final boolean debug = false;
+	public static final boolean debug = true;
 
 	private PaintData donnees;
 	private PaintUI ui;
@@ -113,9 +114,12 @@ public class Paint {
 			public void run() {
 				Paint paint = new Paint();
 				PaintData data = new PaintData(paint);
-				PaintUI ui = new PaintUI("L'outil de peinture le plus perfectionné de 2018", Stream
-						.concat(Arrays.stream(data.getTools()), Arrays.stream(data.getColors())).toArray(Tool[]::new),
-						paint);
+				AbstractAction[] tools;
+				tools = Stream.concat(Arrays.stream(data.getTools()), Arrays.stream(data.getColors()))
+						.toArray(Tool[]::new);
+				tools = Stream.concat(Arrays.stream(tools), Arrays.stream(data.getFill()))
+						.toArray(Tool[]::new);
+				PaintUI ui = new PaintUI("L'outil de peinture le plus perfectionné de 2018", tools, paint);
 
 				paint.setUI(ui);
 				paint.setData(data);

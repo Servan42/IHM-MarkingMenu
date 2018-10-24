@@ -65,7 +65,13 @@ public class PaintUI extends JFrame {
 
 				for (ColouredShape shape : displayed) {
 					g2.setColor(shape.getColor());
-					g2.draw(shape.getShape());
+
+					if (shape.isFilled()) {
+						g2.fill(shape.getShape());
+					} else {
+						g2.draw(shape.getShape());
+					}
+
 				}
 			}
 		}, new Integer(1));
@@ -104,7 +110,6 @@ public class PaintUI extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 			}
 		});
 

@@ -37,7 +37,9 @@ public class MarkingMenuUI extends ComponentUI {
 		Object[] items = menu.getList();
 		int numberOfItems = items.length;
 		super.paint(g, c);
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
+		g.fillOval(menu.getPosX() - diameter / 2 - 3, menu.getPosY() - diameter / 2 - 3, diameter + 6, diameter + 6);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillOval(menu.getPosX() - diameter / 2, menu.getPosY() - diameter / 2, diameter, diameter);
 		g.setColor(Color.BLACK);
 		g.fillOval(menu.getPosX() - diameter / 8, menu.getPosY() - diameter / 8, diameter / 4, diameter / 4);
@@ -87,25 +89,20 @@ public class MarkingMenuUI extends ComponentUI {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 		}
 
 		@Override
@@ -120,7 +117,6 @@ public class MarkingMenuUI extends ComponentUI {
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
