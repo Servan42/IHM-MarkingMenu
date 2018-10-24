@@ -27,6 +27,6 @@
 ## Known ~~bugs~~ features
 
 * If the left click is held once the menu is open (thus right click held too), two things might occur when a new tool is selected : 
-..* Either the newly selected tool has been used in the past, then a new shape of this tool is drawn until the right click is released (even if left click is released, clicked again, etc.)
-..* Or the tool has never been selected, and exceptions will be raised until right click is released, but are transparent to the user
+  * Either the newly selected tool has been used in the past, then a new shape of this tool is drawn until the right click is released (even if left click is released, clicked again, etc.)
+  * Or the tool has never been selected, and exceptions will be raised until right click is released, but are transparent to the user
 * Right clicking while drawing a shape (holding left click) will delete the current one and start drawing another at the current position of the cursor.
