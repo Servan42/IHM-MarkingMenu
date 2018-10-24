@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,7 @@ public class PaintData {
 	Tool selectedTool;
 	Color color = Color.BLACK;
 	Tool[] tools;
+	boolean[] buttons = new boolean[3];
 
 	public PaintData(Paint controller) {
 		this.controller = controller;
@@ -31,9 +33,9 @@ public class PaintData {
 	}
 
 	public class Tool extends AbstractAction implements MouseInputListener {
-		Point o;
 		Shape shape;
 		String name;
+		Point o;
 
 		/**
 		 * Creates a tool. If the name of the tool is not unique, it might create
@@ -64,11 +66,11 @@ public class PaintData {
 		}
 
 		public void mousePressed(MouseEvent e) {
-			o = e.getPoint();
+				o = e.getPoint();
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			shape = null;
+				shape = null;
 		}
 
 		public void mouseDragged(MouseEvent e) {
@@ -76,7 +78,7 @@ public class PaintData {
 
 		public void mouseMoved(MouseEvent e) {
 		}
-		
+
 		public String toString() {
 			return name;
 		}
@@ -88,9 +90,9 @@ public class PaintData {
 	public void initTools() {
 		Tool[] tools = { new Tool("pen") {
 			public void mouseDragged(MouseEvent e) {
-				if(!SwingUtilities.isLeftMouseButton(e))
+				if (!SwingUtilities.isLeftMouseButton(e))
 					return;
-				
+
 				Path2D.Double path = (Path2D.Double) shape;
 				if (path == null) {
 					path = new Path2D.Double();
@@ -103,9 +105,9 @@ public class PaintData {
 			}
 		}, new Tool("rect") {
 			public void mouseDragged(MouseEvent e) {
-				if(!SwingUtilities.isLeftMouseButton(e))
+				if (!SwingUtilities.isLeftMouseButton(e))
 					return;
-				
+
 				Rectangle2D.Double rect = (Rectangle2D.Double) shape;
 				if (rect == null) {
 					rect = new Rectangle2D.Double(o.getX(), o.getY(), 0, 0);
@@ -118,9 +120,9 @@ public class PaintData {
 			}
 		}, new Tool("elli") {
 			public void mouseDragged(MouseEvent e) {
-				if(!SwingUtilities.isLeftMouseButton(e))
+				if (!SwingUtilities.isLeftMouseButton(e))
 					return;
-				
+
 				Ellipse2D.Double elli = (Ellipse2D.Double) shape;
 				if (elli == null) {
 					elli = new Ellipse2D.Double(o.getX(), o.getY(), 0, 0);
@@ -162,6 +164,33 @@ public class PaintData {
 		} };
 
 		this.tools = tools;
+	}
+
+	/**
+	 * Saves which button is pressed or not
+	 * 
+	 * @param button the pressed button
+	 */
+	public void buttonDown(int button) {
+		buttons[button - 1] = true;
+	}
+
+	/**
+	 * Saves which button is pressed or not
+	 * 
+	 * @param button the released button
+	 */
+	public void buttonUp(int button) {
+		buttons[button - 1] = false;
+	}
+
+	/**
+	 * Indicates if the left button is held down
+	 * 
+	 * @return
+	 */
+	public boolean leftButtonDown() {
+		return buttons[0];
 	}
 
 	/**

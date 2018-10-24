@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 
 import model.MarkingMenuData;
+import model.PaintData;
 import view.MarkingMenuUI;
 import view.PaintUI;
 
@@ -63,6 +64,7 @@ public class MarkingMenu extends JComponent {
 	public void handleMoved(MouseEvent e) {
 		if (e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter() / 2)) {
 			globalUI.hideMenu();
+			
 			AbstractAction item = data.getList()[getIndexFromPoint(e.getPoint())];
 			item.actionPerformed(new ActionEvent(item, ActionEvent.ACTION_PERFORMED, "MarkingMenuSelect"));
 		}

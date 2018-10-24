@@ -84,7 +84,7 @@ public class Paint {
 	 */
 	public void mousePressed(MouseEvent e) {
 		// Clic droit : on crée et fait afficher un menu selon le contexte
-		if (e.getButton() == MouseEvent.BUTTON3) {
+		if (e.getButton() == MouseEvent.BUTTON3 && !donnees.leftButtonDown()) {
 			try {
 				MarkingMenu mm = new MarkingMenu(e.getX(), e.getY(), donnees.getTools(), ui);
 				ui.displayMenu(mm);
@@ -94,6 +94,12 @@ public class Paint {
 					System.out.println("Paint.mousePressed IllegalArgumentException");
 			}
 		}
+		
+		donnees.buttonDown(e.getButton());
+	}
+	
+	public void mouseReleased(MouseEvent e) {
+		donnees.buttonUp(e.getButton());
 	}
 
 	/* main *********************************************************************/
