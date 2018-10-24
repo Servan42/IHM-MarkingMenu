@@ -1,12 +1,14 @@
 package model;
 
+import javax.swing.AbstractAction;
+
 public class MarkingMenuData {
 	private int posX;
 	private int posY;
 	private int diameter;
-	private Object[] list;
+	private AbstractAction[] list;
 	
-	public MarkingMenuData(int x, int y, Object[] list) {
+	public MarkingMenuData(int x, int y, AbstractAction[] list) {
 		posX = x;
 		posY = y;
 		diameter = 200;
@@ -33,7 +35,7 @@ public class MarkingMenuData {
 		return diameter;
 }
 
-	public Object[] getList() {
+	public AbstractAction[] getList() {
 		return list.clone();
 	}
 }

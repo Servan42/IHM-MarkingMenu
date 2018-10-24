@@ -1,8 +1,10 @@
 package controler;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
+import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 
 import model.MarkingMenuData;
@@ -15,7 +17,7 @@ public class MarkingMenu extends JComponent {
 	private MarkingMenuData data;
 	private PaintUI globalUI;
 
-	public MarkingMenu(int posX, int posY, Object[] list, PaintUI globalUI) throws IllegalArgumentException {
+	public MarkingMenu(int posX, int posY, AbstractAction[] list, PaintUI globalUI) throws IllegalArgumentException {
 		if (list.length > 8)
 			throw new IllegalArgumentException();
 		this.setUI(ui = new MarkingMenuUI(this));
@@ -55,7 +57,9 @@ public class MarkingMenu extends JComponent {
 
 	public void mouseMoved(MouseEvent e) {
 		if (e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter() / 2)) {
-			System.out.println(getIndexFromPoint(e.getPoint()));
+			AbstractAction item = data.getList()[getIndexFromPoint(e.getPoint())];
+			item.actionPerformed(new ActionEvent(item, ActionEvent.ACTION_PERFORMED, "MarkingMenuSelect"));
+			globalUI.hideMenu();
 		}
 	}
 
