@@ -12,17 +12,17 @@
 * Use the right click to open the marking menu. It will open where you clicked.
 * An item is selected when either releasing the right click over it, or when leaving the menu zone.
 * Releasing the right click over the center of menu cancels the current choice. Previous choices are applied and can't be undone. 
-* When the selection is canceled before going through all the menus, the settings that should have been set will remain at their last state.
 * When leaving the zone, if the item has further options (as colors for example), it will open another marking menu.
+* When the selection is canceled before going through all the menus, the settings that should have been set will remain at their last state.
 * The marking menu doesn't accept a list of more than 8 elements.
 
 ### Implementation choices
 
-* The Paint class has been rewritten to follow an MVC architecture.
+* The Paint class has been rewritten to follow a MVC architecture.
 * The main class is located under controller.Paint.
-* Each tool contains a method that returns the list of the following tools list if any.
 * The menu is a widget contained in another layer than the panel, thanks to javax.swing.JLayeredPane.
 * Menus are instantiated when required, upon right click or leaving the previous menu.
+* Each tool contains a method that returns the list of the following tools list if any.
 
 ## Known ~~bugs~~ features
 
