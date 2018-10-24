@@ -56,10 +56,10 @@ public class MarkingMenuUI extends ComponentUI {
 	public int indexFromAngle(double angle) {
 		int nbItems = menu.getList().length;
 		int i = 0;
-		angle = 360-angle; // Making it clockwise
-		
+		angle = 360 - angle; // Making it clockwise
+
 		for (i = 0; i < nbItems; i++) {
-			if(angle >= i*360/nbItems && angle < (i+1)*360/nbItems)
+			if (angle >= i * 360 / nbItems && angle < (i + 1) * 360 / nbItems)
 				break;
 		}
 

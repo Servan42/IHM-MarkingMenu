@@ -67,8 +67,8 @@ public class MarkingMenu extends JComponent {
 		if (e.getPoint().distance(data.getPosX(), data.getPosY()) > (data.getDiameter() / 2)) {
 			globalUI.hideMenu();
 			AbstractAction item = data.getList()[getIndexFromPoint(e.getPoint())];
-			if(((Tool)item).getOptions() != null)
-			globalUI.displayMenu(new MarkingMenu(e.getX(), e.getY(), ((Tool)item).getOptions(), globalUI));
+			if (((Tool) item).getOptions() != null)
+				globalUI.displayMenu(new MarkingMenu(e.getX(), e.getY(), ((Tool) item).getOptions(), globalUI));
 			item.actionPerformed(new ActionEvent(item, ActionEvent.ACTION_PERFORMED, "MarkingMenuSelect"));
 		}
 	}

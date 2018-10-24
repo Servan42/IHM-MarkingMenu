@@ -151,9 +151,9 @@ public class PaintData {
 				return colors.clone();
 			}
 		} };
-		
+
 		this.tools = tools;
-		
+
 		Tool[] colors = { new Tool("Black") {
 
 			public void actionPerformed(ActionEvent e) {

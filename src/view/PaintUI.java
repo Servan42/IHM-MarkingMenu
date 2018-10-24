@@ -185,7 +185,7 @@ public class PaintUI extends JFrame {
 	/**
 	 * Hides the MarkingMenu behind the panel and affects the right listeners
 	 */
-	public void hideMenu() {		
+	public void hideMenu() {
 		MouseListener[] MMml = panel.getListeners(MouseListener.class);
 		for (MouseListener ml : MMml)
 			panel.removeMouseListener(ml);
