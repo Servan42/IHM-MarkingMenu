@@ -93,12 +93,12 @@ public class MarkingMenuUI extends ComponentUI {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			menu.mouseReleased(e);
+			menu.handleReleased(e);
 		}
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			menu.mouseMoved(e);
+			menu.handleMoved(e);
 		}
 
 		@Override
