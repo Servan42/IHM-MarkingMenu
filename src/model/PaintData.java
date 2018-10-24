@@ -25,6 +25,7 @@ public class PaintData {
 	Tool selectedTool;
 	Color color = Color.BLACK;
 	Tool[] tools;
+	Tool[] colors;
 	boolean[] buttons = new boolean[3];
 
 	public PaintData(Paint controller) {
@@ -66,11 +67,11 @@ public class PaintData {
 		}
 
 		public void mousePressed(MouseEvent e) {
-				o = e.getPoint();
+			o = e.getPoint();
 		}
 
 		public void mouseReleased(MouseEvent e) {
-				shape = null;
+			shape = null;
 		}
 
 		public void mouseDragged(MouseEvent e) {
@@ -133,7 +134,11 @@ public class PaintData {
 						Math.abs(e.getY() - o.getY()));
 				controller.toolFinished(new ArrayList(shapes));
 			}
-		}, new Tool("Black") {
+		} };
+
+		this.tools = tools;
+
+		Tool[] colors = { new Tool("Black") {
 			public void actionPerformed(ActionEvent e) {
 				if (Paint.debug)
 					System.out.println("Choosing color Black");
@@ -163,7 +168,7 @@ public class PaintData {
 			}
 		} };
 
-		this.tools = tools;
+		this.colors = colors;
 	}
 
 	/**
@@ -196,9 +201,18 @@ public class PaintData {
 	/**
 	 * Returns a copy of the tools list
 	 * 
-	 * @return A copy o the tools list
+	 * @return A copy of the tools list
 	 */
 	public Tool[] getTools() {
+		return tools.clone();
+	}
+
+	/**
+	 * Returns a copy of the colors list
+	 * 
+	 * @return A copy of the colors list
+	 */
+	public Tool[] getColors() {
 		return tools.clone();
 	}
 }
